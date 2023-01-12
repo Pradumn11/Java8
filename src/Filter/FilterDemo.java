@@ -1,6 +1,5 @@
 package Filter;
 
-import static Constants.FilterConstants.schoolIdList;
 import static ObjectHelper.PredicateHelper.*;
 
 import ObjectHelper.SchoolListHelper;
@@ -34,24 +33,12 @@ public class FilterDemo {
 
     }
 
-    public static List<String> getSchoolNameById(Integer schoolid) {
-        if (!schoolIdList.contains(schoolid)){
-            throw new RuntimeException("Invalid School Id");
-        }
-        return schoolHelper.getSchoolsList()
-                .stream()
-                .filter(school->checkSchoolId.test(school,schoolid))
-                .map(School::getSchoolName)
-                .collect(Collectors.toList());
-    }
 
     public static String getTopperSchoolName(List<Student> students) {
         if (students.isEmpty()) {
             throw new RuntimeException("Invalid List");
         }
         Student student = students.stream().max(Comparator.comparingInt(Student::getPercentage)).get();
-
-
         List<School> schoolList = schoolHelper.getSchoolsList();
         return schoolList.stream().filter(school -> isAdultMale.test(school, student)).map(School::getSchoolName).collect(Collectors.joining());
     }

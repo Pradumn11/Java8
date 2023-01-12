@@ -18,7 +18,5 @@ public class FilterMain {
         //get SchoolName of Topper (hardcoded percentage without conflicting ones)
         System.out.println(getTopperSchoolName(studentList));
 
-//        Fetch SchoolName By id
-        getSchoolNameById(101).forEach(System.out::println);
     }
 }

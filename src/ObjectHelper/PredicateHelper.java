@@ -16,7 +16,8 @@ public class PredicateHelper {
     static Predicate<Student> maxFirstclass = (student) -> student.getPercentage() < DISTINCTION;
     public static Predicate<Student> checkFirstclass = maxFirstclass.and(minFirstclass);
 
-    public static Predicate<Student>checkMale=(student)->student.getGender().equalsIgnoreCase(MALE);
-    public static BiPredicate<School,Integer>checkSchoolId=(schoolId1,schoolI2)->schoolId1.getSchoolId()==schoolI2;
-    public static Predicate<Student>checkFemale=(p)->p.getGender().equalsIgnoreCase(FEMALE);
+    public static Predicate<Student> checkMale = (student) -> student.getGender().equalsIgnoreCase(MALE);
+    public static BiPredicate<School, Integer> checkSchoolId = (schoolId1, schoolI2) -> schoolId1.getSchoolId() == schoolI2;
+    public static Predicate<Student> checkFemale = (p) -> p.getGender().equalsIgnoreCase(FEMALE);
+    public static BiPredicate<Student, Integer> checkSchoolName = (p1, p2) -> p1.getSchoolId() == p2;
 }
