@@ -1,6 +1,5 @@
 package CompetableFuture;
 
-import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -8,17 +7,16 @@ import java.net.http.HttpResponse;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class Demo {
+public class HttpClientDemo {
 
     public static void main(String[] args) throws InterruptedException {
         HttpClient client = HttpClient.newBuilder()
                 .version(HttpClient.Version.HTTP_1_1)
                 .build();
-        Executor executor = Executors.newSingleThreadExecutor();
+        ExecutorService executor = Executors.newSingleThreadExecutor();
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
                 .uri(URI.create("https://www.amazon.com"))
@@ -44,11 +42,11 @@ public class Demo {
         Duration dur = Duration.between(before, after);
         System.out.println(dur.toMillis());
         Thread.sleep(6000);
-        ((ExecutorService) executor).shutdown();
+        executor.shutdown();
 
 
     }
 
-    public Demo() throws IOException, InterruptedException {
+    public HttpClientDemo()  {
     }
 }

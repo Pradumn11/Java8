@@ -5,7 +5,9 @@ import java.io.StringReader;
 public class School {
     public School() {
     }
-
+    int schoolId;
+    String schoolName;
+    String location;
     public int getSchoolId() {
         return schoolId;
     }
@@ -30,9 +32,7 @@ public class School {
         this.location = location;
     }
 
-    int schoolId;
-    String schoolName;
-    String location;
+
 
     public School(int schoolId, String schoolName, String location) {
         this.schoolId = schoolId;
