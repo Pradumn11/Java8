@@ -7,6 +7,16 @@ public class School {
     }
     int schoolId;
     String schoolName;
+
+    @Override
+    public String toString() {
+        return "School{" +
+                "schoolId=" + schoolId +
+                ", schoolName='" + schoolName + '\'' +
+                ", location='" + location + '\'' +
+                '}';
+    }
+
     String location;
     public int getSchoolId() {
         return schoolId;
