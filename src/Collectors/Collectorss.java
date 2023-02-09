@@ -124,7 +124,7 @@ public class Collectorss {
                         .collect(groupingBy(School::getSchoolId,flatMapping(a->Stream.of(a.getSchoolName().split("")),toSet())))
         );
 
-        // Sorting based on object value --here issue is two id is same it doesnt sort base on the schoolname --
+        //Sorting based on object value --here issue is two id is same it doesnt sort base on the schoolname --
         schools.stream().sorted(Comparator.comparing(School::getSchoolId)
                 //to sort based on school name if is is same
                 .thenComparing(School::getSchoolName)
