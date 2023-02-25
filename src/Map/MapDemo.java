@@ -1,8 +1,12 @@
 package Map;
 
+import MapGson.Animal;
+import MapGson.Child;
 import Pojos.School;
 
+import java.lang.reflect.Type;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -16,6 +20,8 @@ import static ObjectHelper.PredicateHelper.checkSchoolName;
 
 import ObjectHelper.StudentsListHelper;
 import Pojos.Student;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 public class MapDemo {
     StudentsListHelper studentsListHelper = new StudentsListHelper();
@@ -45,6 +51,43 @@ public class MapDemo {
                 .filter(student -> checkSchoolName.test(student, schoolId))
                 .map(student -> student.getFirstName() + " " + student.getLastName())
                 .collect(Collectors.toList());
+    }
+    public static Map<String,List<Child>>filterByValueInsideObjectListInsideObject(){
+        Gson gson=new Gson();
+        String typeT=" {\n" +
+                " \"Bob\":{\n" +
+                "    \"location\": \"Nashik\",\n" +
+                "    \"number\": 10,\n" +
+                "    \"list\": [\n" +
+                "        {\n" +
+                "            \"name\": \"Pradumnya\",\n" +
+                "            \"category\": 1\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"name\": \"Yash\",\n" +
+                "            \"category\": 1\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"name\": \"Omkar\",\n" +
+                "            \"category\": 3\n" +
+                "        }\n" +
+                "    ]\n" +
+                "}\n" +
+                " }";
+        Type empMapType = new TypeToken<Map<String, Animal>>() {}.getType();
+        Map<String,Animal>aaa=gson.fromJson(typeT,empMapType);
+        System.out.println(aaa);
+        Map<String,List<Child>>ap=aaa.entrySet()
+                .stream()
+                .collect(
+                        Collectors.toMap(
+                                k->k.getKey(),
+                                e->e.getValue().getList()
+                                        .stream().filter(op->op.getCategory()==1)
+                                        .collect(Collectors.toList())
+                        )
+                );
+        return ap;
     }
 
 
